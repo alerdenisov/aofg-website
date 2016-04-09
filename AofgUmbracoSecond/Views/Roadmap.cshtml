@@ -1,6 +1,6 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Roadmap>
-    @using ContentModels = Umbraco.Web.PublishedContentModels;
-    @{
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
     Layout = "MasterLayout.cshtml";
 
     Func<dynamic, string, dynamic> Field = (x, field) => x.GetPropertyValue(field);

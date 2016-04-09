@@ -1,0 +1,82 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = null;
+}
+
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+
+    <script src="https://use.typekit.net/gvf5gpx.js"></script>
+    <script>
+        try {
+            Typekit.load({ async: false });
+        } catch (e) {
+        }
+    </script>
+		
+<header class="PageHeader">
+    <div class="HeaderContent">
+        <div class="HeaderLogotype">
+            <img src="/images/internal_logo.png" alt="Age of Guilds first open source MMORPG"  class="logotype"/>
+        </div>
+
+        <div class="HeaderTitle">
+			@if(CurrentPage.Parent != null) 
+			{
+				<h3 class="bread"><a href="@CurrentPage.Parent.Url">@CurrentPage.Parent.GetPropertyValue("pageTitle")</a></h3>
+			}
+            <h1 class="title">@Umbraco.Field("pageTitle", recursive: true)</h1>
+        </div>
+    </div>
+
+</header>
+        <nav class="PageNagivation">
+                <div class="NavigationAuth">
+
+                </div>
+                <ul class="BaseNavigation">
+                    <li class="NavigationButton"><a href="/" class="link">Главная</a></li>
+                    <li class="NavigationButton"><a href="/roadmap" class="link">Разработка</a></li>
+                    <li class="NavigationButton"><a href="/blog" class="link">Девлог</a></li>
+                    <li class="NavigationButton"><a href="/wiki" class="link">Библиотека</a></li>
+                    <li class="NavigationButton"><a href="/media" class="link">Медиа</a></li>
+                </ul>
+        </nav>
+@RenderBody()
+			
+			
+	<div id="footer-container">
+		<footer class="wrapper">
+			<h3>@Umbraco.Field("footerText", recursive: true)</h3>
+		</footer>
+	</div>
+<!-- Latest compiled and minified JavaScript -->
+    <script src="/scripts/libs/modernizr-2.0.6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function() {
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    });
+</script>
+
+    <script src="/scripts/app.js"></script>
+</body>
+</html>

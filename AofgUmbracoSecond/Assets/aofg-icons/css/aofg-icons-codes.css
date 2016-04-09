@@ -1,0 +1,12 @@
+
+.ic-github:before { content: '\e800'; } /* '' */
+.ic-vkontakte-rect:before { content: '\e801'; } /* '' */
+.ic-facebook-rect:before { content: '\e802'; } /* '' */
+.ic-specification:before { content: '\e803'; } /* '' */
+.ic-article:before { content: '\e804'; } /* '' */
+.ic-research:before { content: '\e805'; } /* '' */
+.ic-documentation:before { content: '\e806'; } /* '' */
+.ic-development:before { content: '\e807'; } /* '' */
+.ic-integration:before { content: '\e808'; } /* '' */
+.ic-gitter-01:before { content: '\e809'; } /* '' */
+.ic-trello-01:before { content: '\e80a'; } /* '' */

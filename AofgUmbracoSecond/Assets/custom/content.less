@@ -1,0 +1,423 @@
+﻿// Helpers 
+
+._righttext {
+    text-align: right;
+}
+
+._nogutter { 
+    margin-left: -@grid-gutter-width / 2;
+    margin-right: -@grid-gutter-width / 2;
+    padding-left: @grid-gutter-width / 2;
+    padding-right: @grid-gutter-width / 2;
+}
+
+
+._grow {
+    flex-grow: 1;
+}
+
+
+
+.content-container {
+    .content-sidebar {
+    }
+
+    .content-body {
+        background-color: white;
+    }
+}
+
+
+// blog
+.BlogPost {
+    background-color: white;
+
+    &.-thumbnailed {
+
+    }
+    &.-summary {
+        border-top: 1px solid #e3e9f5;
+
+        &:nth-child(1) {
+            border-top: 0;
+        }
+    }
+    
+    .BlogEntry {
+    }
+    .MetaData {
+
+    
+    }
+    .MetaData,
+    .BlogEntry {
+        padding-bottom: 20px;
+    }
+    .Thumbnail {}
+}
+.BlogEntry {
+    padding-top: 35px;
+    .header {
+        > .title {
+            margin-top: 0;
+            font-size: 24px; 
+            line-height: 1.3em;
+        }
+    }
+
+    .body {
+
+    }
+}
+
+.MetaData {
+
+}
+
+.Thumbnail {
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+
+    // Can't to setup custom css class here.. :(
+    img {
+        width: 100%;
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        transition: transform 0.25s ease;
+
+        &:hover {
+            transform: translate(-50%, -50%) scale(1.1) rotate(-10deg);
+        }
+    }
+}
+
+.blog-entry {
+    border-top: 1px solid #e3e9f5;
+
+    &:nth-child(1) {
+        border-top: 0;
+    }
+
+    &:hover {
+        .entry-thumbnail {
+            img {
+                transform: translate(-50%, -50%) scale(1) rotate(-10deg);
+            }
+        }
+    }
+
+    .entry-thumbnail {
+        padding: 0;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            position: absolute;
+            display: block;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+            transition: transform 0.25s ease;
+
+            &:hover {
+                transform: translate(-50%, -50%) scale(1) rotate(-10deg);
+            }
+        }
+    }
+    .entry-side {
+        .entry-meta {
+            .entry-date,
+            .entry-comments {
+                display: block;
+            }
+        }
+    }
+
+
+    .entry-cut {
+
+        h3 {
+            margin-top: 15px;
+            font-size: 24px;
+            line-height: 1.3em;
+        }
+    }
+
+    .entry-cut, 
+    .entry-side {
+        padding-bottom: 20px;
+    }
+
+    .entry-cut {
+        padding-top: 10px;
+
+    }
+}
+
+
+.SubscribePanel {
+    color: white;
+    .title {
+
+    }
+
+    .description {
+
+    }
+
+    // Inline fields decorator
+    &.-inline {
+        .SubscribeField {
+            margin-top: 25px;
+            // all
+            padding-left: 10px;
+            padding-right: 10px;
+            // first
+            &:nth-child(1) {
+                padding-left: @grid-gutter-width / 2;
+            }
+
+            &:last-child {
+                padding-right: @grid-gutter-width / 2;
+            }
+        }
+    }
+
+    // Aside placement decorator (may move to .AsidePanel? )
+    &.-aside {
+        .SubscribeButton {
+            .btn {
+                margin: 20px -7px;
+                display: block;
+                width: auto;
+            }
+        }
+    }
+}
+
+.SubscribeField {
+    .fieldlabel {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .fieldinput {
+
+    }
+}
+
+.SubscribeButton {
+
+}
+
+
+
+// team
+.PeopleList {
+    color: white;
+    background-color: #3e4147;
+
+    margin-left: -@grid-gutter-width / 2;
+    margin-right: -@grid-gutter-width / 2;
+    padding: @grid-gutter-width / 2;
+
+    .PeopleItem {
+        ._nogutter();
+    }
+
+
+    > .more {
+        color: white;
+        border-bottom-color: fade(white, 15%);
+        font-weight: bold;
+
+        display: inline-block;
+        margin-top: 15px;
+
+        &:hover {
+            border-bottom-color: fade(white, 25%);
+        }
+    }
+}
+
+.PeopleItem {
+    overflow: hidden;
+    background-color: #37383a;
+    clear: both;
+    color: white;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    > .PeopleBadge {
+        flex-grow: 1;
+        overflow: hidden;
+        margin-right: 20px;
+    }
+
+    > .PeopleData {
+        float: right;
+    }
+}
+
+.PeopleData { 
+    > .title {
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    > .body {
+
+    }
+}
+
+
+// peoples
+.PeopleBadge {
+    background-color: #37383a;
+    clear: both;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .PeopleAvatar {
+        flex-shrink: 0;
+    }
+
+    > .body {
+        flex-grow: 1;
+        overflow: hidden;
+
+        > .header, 
+        > .nickname, 
+        > .line, 
+        > .status {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &.-cornered {
+        height: 90px;
+        position: relative;
+
+        > * { 
+            position:relative;
+            z-index: 1; 
+        }
+
+        &::after,
+        &::before {
+            position: absolute;
+            background-color: #37383a;
+            content: " ";
+            width: 100px;
+            height: 45px;
+
+            z-index: 0;
+        }
+
+        &::after {
+            top: 0;
+            left: -45px;
+        }
+
+        &::before {
+            bottom: 0;
+            left: -23px;
+
+            transform: skew(45deg);
+        }
+    }
+
+    &.-inline {
+        .pull-left();
+
+        .PeopleAvatar {
+            margin-right: 10px;
+            .pull-left();
+        }
+    }
+
+    
+    &.-cornered {
+        .PeopleAvatar {
+            margin-left: -75px;
+        }
+    }
+
+
+    img,
+    span {
+        display: block;
+    }
+
+    .header,
+    .nickname {
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .line,
+    .status {
+        font-size: 14px;
+    }
+        
+}
+
+.PeopleAvatar {
+    width: 120px;
+    height: 120px;
+
+    &.-medium {
+        width: 80px;
+        height: 80px;
+    }
+
+    &.-small {
+        width: 63px;
+        height: 63px;
+    }
+
+    .image {
+        display: block;
+        width: 100%;
+        max-height: 100%;
+        border-radius: 999px;
+    }
+}
+
+.MetaData {
+    .PeopleBadge {
+        margin-right: -@grid-gutter-width / 2;
+         
+        .body {
+            padding-right: 30px;
+        }
+    }
+}
+
+
+
+
+.PageHeader {
+    .logotype {
+        width: 269px;
+        height: 313px;
+        background: url(../Content/images/logotype-page.png) no-repeat center center;
+        text-indent: -10000px;
+        overflow: hidden;
+    }
+}

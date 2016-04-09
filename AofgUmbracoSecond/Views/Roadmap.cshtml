@@ -1,0 +1,138 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Roadmap>
+    @using ContentModels = Umbraco.Web.PublishedContentModels;
+    @{
+    Layout = "MasterLayout.cshtml";
+
+    Func<dynamic, string, dynamic> Field = (x, field) => x.GetPropertyValue(field);
+    Func<dynamic, string, int> Int = (x, field) => x.GetPropertyValue<int>(field);
+    Func<dynamic, string, dynamic> Flag = (x, field) => {
+        string s = Umbraco.GetPreValueAsString(Int(x, field)).ToString();
+        switch(s) {
+            case "Not started":
+                return new HtmlString("<div class=\"RevisionFlag -not\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Ожидает\"></div>");
+            case "In progress":
+                return new HtmlString("<div class=\"RevisionFlag -progress\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"В работе\"></div>");
+            case "Complete":
+                return new HtmlString("<div class=\"RevisionFlag -complete\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Завершено\"></div>");
+            case "Not required":
+                return new HtmlString("<div class=\"RevisionFlag -isnt\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Не требуется\"></div>");
+            default:
+                return new HtmlString("<div class=\"RevisionFlag -wut\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Ожидает\"></div>");
+        }
+    };
+    Func<dynamic, List<Umbraco.Web.PublishedContentModels.Member>> CollectUniqueContributers = (root) =>
+    {
+        var result = new List<Umbraco.Web.PublishedContentModels.Member>();
+        foreach (var child in root.Children())
+        {
+            if (!child.HasProperty("contributers")) continue;
+            var contributers = child.GetPropertyValue("contributors").AsPublishedContent();
+            foreach (var member in contributers)
+            {
+                if (result.Contains(member)) continue;
+                result.Add(member);
+            }
+        }
+
+        return result;
+    };
+    
+    Func<Umbraco.Web.PublishedContentModels.Member, string, IHtmlString> DrawMemberFace = (member, crop) =>
+    {
+        IHtmlString result = new HtmlString("<div class=\"face -thumb\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"" + member.Name + "\">" + member.Name[0] + "</div>");
+        var image = member.MemberPicture;
+        if (image != null)
+        {
+            var path = image.ToHtmlString();
+            if (image.HasCrop("memberPicture20"))
+            {
+                path = path + image.GetCropUrl("memberPicture20");
+            }
+            result = new HtmlString(string.Format(@"<img src=""{0}"" alt="""" width=""30"" height=""30"" class=""face"" data-toggle=""tooltip"" data-placement=""top"" title=""{1}"" />", path, member.Name));
+        }
+
+        return result;
+    };
+
+    var revisions = CurrentPage.Site().FirstChild("development")
+        .FirstChild("roadmap")
+        .Children("revision")
+        .Where("Visible")
+        .OrderBy("CreateDate");
+}
+
+
+<div class="PageContent container-fluid">
+    @foreach(var revision in revisions){
+        <div class="RevisionRow">
+            <div class="StageCol col-md-5">
+                <h2>@Field(revision, "pageTitle")</h2>
+                <p>@Field(revision, "pageBody")</p>
+                <div class="_grow"></div>
+                <p>Запланированные к решению пользовательские истории:</p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="ClientCol col-md-2">
+                <h4>Клиент</h4>
+                <p>@Field(revision, "revisionClient")</p>
+                <div class="_grow"></div>
+                <div class="FlagsIcons">
+                    <span class="FlagIcon ic-icon ic-research" data-toggle="tooltip" data-placement="top" title="Исследование"></span>
+                    <span class="FlagIcon ic-icon ic-specification" data-toggle="tooltip" data-placement="top" title="Спецификация"></span>
+                    <span class="FlagIcon ic-icon ic-development" data-toggle="tooltip" data-placement="top" title="Разработка"></span>
+                    <span class="FlagIcon ic-icon ic-integration" data-toggle="tooltip" data-placement="top" title="Интеграция"></span>
+                    <span class="FlagIcon ic-icon ic-documentation" data-toggle="tooltip" data-placement="top" title="Документация"></span>
+                </div>
+            </div>
+            <div class="TeamCol col-md-4">
+                <h4>Команда</h4>
+                <p>@Field(revision, "revisionTeam")</p>
+            </div>
+        </div>
+        foreach (var x in revision.Children())
+        {
+            <div class="FeatureRow" data-feature-id="@x.Id">
+                <div class="title col-md-5">
+                    <a href="@x.Url">@Field(x, "pageTitle")</a>
+                </div>
+                <div class="RoadmapButtons col-md-1 clearfix">
+                    <a href="" class="RoadmapButton" data-toggle="tooltip" data-placement="top" title="Подробнее">
+                        <span class="ic-icon ic-article"></span>
+                    </a>
+                    @{
+                        var trello = x.GetPropertyValue<string>("featureTrello");
+                        var git = x.GetPropertyValue<string>("featureGithub");
+                        if (!string.IsNullOrEmpty(git))
+                        {
+                            <a href="https://github.com/@git" target="_blank" class="RoadmapButton" data-toggle="tooltip" data-placement="top" title="Github">
+                                <span class="ic-icon ic-github"></span>
+                            </a>
+                            <a href="https://gitter.im/@git" target="_blank" class="RoadmapButton" data-toggle="tooltip" data-placement="top" title="Gitter (чат)">
+                                <span class="ic-icon ic-gitter"></span>
+                            </a>
+                        }
+                        if (!string.IsNullOrEmpty(trello))
+                        {
+                            <a href="@trello" target="_blank" class="RoadmapButton" data-toggle="tooltip" data-placement="top" title="Trello Board">
+                                <span class="ic-icon ic-trello"></span>
+                            </a>
+                        }
+                    }
+                </div>
+                <div class="RevisionFlags clearfix col-md-2">
+                    @Flag(x, "revisionResearch")
+                    @Flag(x, "revisionSpecification")
+                    @Flag(x, "revisionDeveloping")
+                    @Flag(x, "revisionIntegration")
+                    @Flag(x, "revisionDocumentation")
+                </div>
+                <div class="TeamFaces clearfix col-md-4">
+                    @foreach (var member in CollectUniqueContributers(x))
+                    {
+                        @DrawMemberFace(member, "memberPicture20")
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>

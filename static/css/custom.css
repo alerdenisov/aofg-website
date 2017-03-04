@@ -1,0 +1,172 @@
+/* PLACE YOU CUSTOM STYLES IN THIS FILE */
+.nk-navbar .nk-nav .nk-drop-item .nk-drop-item .dropdown {
+  top: 0;
+  margin-top: -30px;
+  margin-left: 100%;
+  margin-left: 100%;
+}
+
+.nk-post-summary {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: -webkit-linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 40%);
+  background: -o-linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 40%);
+  background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 40%);
+
+  padding: 40px;
+}
+
+.row > .col-md-6:nth-child(2n+1) {
+  clear: both;
+}
+
+.row-equals {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.row-equals > div[class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+div.nk-forum-activity-avatar {
+  vertical-align: middle;
+}
+
+.nk-forum-activity-avatar img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+}
+
+.nk-forum>li {
+  padding: 40px 40px;
+}
+
+.nk-forum>li>* {
+  vertical-align: middle;
+}
+
+
+.bg-image {
+  transition: mask-position 1.55s ease-out, -webkit-mask-position 1.55s ease-out, opacity 1.55s ease-out;
+  mask-image: url(/static/img/mask.png);
+  -webkit-mask-image: url(/static/img/mask.png);
+  -webkit-mask-position: 0% 100%;
+  mask-position: 0% 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  z-index: -2;
+}
+
+.nk-header-title {
+  background-color: transparent;
+  z-index: auto;
+}
+
+
+.relative { position: relative !important; }
+.absolute { position: absolute !important; }
+
+
+.nk-modal { 
+  background: rgba(0, 0, 0, 0.85);
+}
+
+
+.modal-body {
+  max-height: calc(100vh - 320px);
+  overflow: auto;
+}
+
+.ic-github-2 { margin-right: 40px; }
+
+p {
+  margin-bottom: 1rem;
+}
+
+.nk-ibox-icon > span[class^="ic-"]::before, .nk-ibox-icon > span[class*=" ic-"]::before {
+  margin: 0;
+}
+
+
+.nk-forum-topic>li .nk-forum-topic-footer .nk-forum-reactions {
+  float: right;
+  margin-right: 10px;
+}
+
+.nk-forum-reactions .nk-action-reaction {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.nk-forum-reactions .nk-action-reaction {
+  margin-right: 5px;
+}
+
+.nk-forum-reactions .nk-action-reaction.zero {
+  /* width: 100px; */
+  display: inline-block;
+  margin-right: 0;
+  max-width: 0px;
+  /* overflow: hidden; */
+  transition: max-width 0.3s ease, opacity 0.2s ease;
+  opacity: 0;
+}
+
+.nk-forum-reactions:hover .nk-action-reaction.none {
+  max-width: 0;
+  opacity: 0;
+}
+
+.nk-forum-reactions:hover .nk-action-reaction.zero {
+  margin-right: 5px;
+  max-width: 50px;
+  opacity: 0.5;
+}
+
+.nk-forum-reactions .nk-action-reaction.zero:hover {
+  opacity: 1;
+}
+
+.nk-action-reaction {
+  user-select: none;
+  font-size: 26px;
+  line-height: 26px;
+  position: relative;
+
+  transition: all 0.2s;
+}
+.nk-forum-reactions .nk-action-reaction.none,
+.nk-action-reaction.zero {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+}
+
+.nk-action-reaction.zero {
+  opacity: 0.5;
+}
+
+.nk-action-reaction:hover {
+  filter: none;
+  -webkit-filter: grayscale(0%);
+  opacity: 1;
+}
+
+.nk-action-reaction .nk-badge {
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+}
+
+img.grayscale {
+}

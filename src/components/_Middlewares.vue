@@ -19,6 +19,7 @@
         {
           this.$store.commit('last_route', this.$route);
           // let auth him
+          throw this.gitAuth
           window.location.href = this.gitAuth;
           return;
 
@@ -40,10 +41,10 @@
       },
 
       async access_token(code) {
-        const answer = await axios.post('https://github.com/login/oauth/access_token', {
-          client_id: '',
-          client_secret: '',
-          redirect_uri: 'http://localhost:8080/',
+        const answer = await axios.post(process.env.GITHUB_TOKEN_ENDPOINT, {
+          client_id: process.env.GITHUB_CLIENT_ID,
+          client_secret: process.env.GITHUB_SECRET,
+          redirect_uri: process.env.GITHUB_CALLBACK,
           code,
         })
         console.log('git token', answer)
@@ -53,10 +54,10 @@
 
       gitAuth() {
         return [
-        'https://github.com/login/oauth/authorize',
-        '?client_id=571c999335478c6742dd',
+        process.env.GITHUB_CODE_ENDPOINT,
+        '?client_id=' + process.env.GITHUB_CLIENT_ID,
         '&scope=public_repo user',
-        '&redirect_uri=http://localhost:8080/'].join('')
+        '&redirect_uri=' + process.env.GITHUB_CALLBACK].join('')
       },
     }
   }

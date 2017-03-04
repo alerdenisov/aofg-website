@@ -19,7 +19,16 @@ module.exports = {
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report
+    bundleAnalyzerReport: process.env.npm_config_report,
+
+    github: {
+      GITHUB_CODE_ENDPOINT: 'https://github.com/login/oauth/authorize',
+      GITHUB_TOKEN_ENDPOINT: 'https://github.com/login/oauth/access_token',
+      GITHUB_CLIENT_ID: '571c999335478c6742dd',
+      // netlify github provider
+      GITHUB_CALLBACK: 'https://api.netlify.com/auth/done', //https://scheduler-rebecca-55066.netlify.com/'
+      GITHUB_API: 'https://api.github.com/' 
+    }
   },
   dev: {
     env: require('./dev.env'),
@@ -33,6 +42,16 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cssSourceMap: false,
+
+    github: {
+      GITHUB_CODE_ENDPOINT: 'https://github.com/login/oauth/authorize',
+      GITHUB_TOKEN_ENDPOINT: 'https://github.com/login/oauth/access_token',
+      GITHUB_CLIENT_ID: '910abf65a44b51f93318',
+      GITHUB_CALLBACK: 'http://localhost:8080/',
+      GITHUB_SECRET: '96b030297ff16c36783876f1a909da591fdbc7d0',
+      GITHUB_TOKEN: process.env.TOKEN,
+      GITHUB_API: 'https://api.github.com/' 
+    }
   }
 }

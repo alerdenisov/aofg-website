@@ -12,6 +12,9 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  plugins: [
+    new webpack.EnvironmentPlugin(config[process.env.NODE_ENV === 'production' ? 'build' : 'dev'].github)
+  ],
   // plugins: [
   //   new webpack.ProvidePlugin({
   //     "VideoWorker": "VideoWorker",

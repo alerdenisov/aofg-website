@@ -38,7 +38,7 @@
             </ul>
           </div>
           <div class="modal-footer">
-            <small>Wait 41 minute for next 60 call or </small>&nbsp;&nbsp;&nbsp;<a :href="gitAuth" class="nk-btn nk-btn-color-dark-1 nk-btn-bg-white nk-btn-x3">Auth with <span class="ic-github-2"></span></a>
+            <small>Wait 41 minute for next 60 call or </small>&nbsp;&nbsp;&nbsp;<a href="gitAuth" class="nk-btn nk-btn-color-dark-1 nk-btn-bg-white nk-btn-x3">Auth with <span class="ic-github-2"></span></a>
 
           </div>
         </div><!-- /.modal-content -->
@@ -89,13 +89,6 @@
     },
 
     computed: {
-      gitAuth() {
-        return [
-          'https://github.com/login/oauth/authorize',
-          '?client_id=571c999335478c6742dd',
-          '&scope=public_repo user',
-          '&redirect_uri=http://localhost:8080/'].join('')
-      },
       scrollbarWidth() {
         const outer = document.createElement("div");
         outer.style.visibility = "hidden";

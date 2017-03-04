@@ -4,8 +4,8 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    index: path.resolve(__dirname, '../public/index.html'),
+    assetsRoot: path.resolve(__dirname, '../public'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     productionSourceMap: true,
@@ -27,7 +27,7 @@ module.exports = {
       GITHUB_CLIENT_ID: '571c999335478c6742dd',
       // netlify github provider
       GITHUB_CALLBACK: 'https://api.netlify.com/auth/done', //https://scheduler-rebecca-55066.netlify.com/'
-      GITHUB_API: 'https://api.github.com/' 
+      GITHUB_API: 'https://api.github.com' 
     }
   },
   dev: {
@@ -51,7 +51,7 @@ module.exports = {
       GITHUB_CALLBACK: 'http://localhost:8080/',
       GITHUB_SECRET: '96b030297ff16c36783876f1a909da591fdbc7d0',
       GITHUB_TOKEN: process.env.TOKEN,
-      GITHUB_API: 'https://api.github.com/' 
+      GITHUB_API: 'https://api.github.com' 
     }
   }
 }

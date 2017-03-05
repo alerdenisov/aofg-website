@@ -11,14 +11,6 @@
             <div class="col-xs-12 col-md-6 nk-col-repository" v-for='repository in repositories' :key='repository.id'>
               <aofg-repository-block :repository='repository' />
             </div>
-
-            <div class="col-xs-12 col-md-6 nk-col-repository" v-for='repository in repositories' :key='repository.id'>
-              <aofg-repository-block :repository='repository' />
-            </div>
-
-            <div class="col-xs-12 col-md-6 nk-col-repository" v-for='repository in repositories' :key='repository.id'>
-              <aofg-repository-block :repository='repository' />
-            </div>
           </div>  
           <div class="row row-loading" v-else key='loading'>
             <div class="col-xs-12 col-md-6 col-md-offset-3">

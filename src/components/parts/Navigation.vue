@@ -308,20 +308,7 @@
           },
           {
             title: 'Documentation',
-            path: '/docs',
-            children: [
-              { 
-                title: 'Nested one more', 
-                path: '/docs/1', 
-                children: [
-                  { title: 'Child 1', path: '/docs/1' },
-                  { title: 'Child 1', path: '/docs/1' }
-                ] 
-              },
-              { title: 'Child 1', path: '/docs/1' },
-              { title: 'Child 1', path: '/docs/1' },
-              { title: 'Child 1', path: '/docs/1' },
-            ]
+            path: '/docs'
           }
         ]
       }

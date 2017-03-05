@@ -7893,10 +7893,7 @@ div.nk-error {
 .nk-doc-links ul>li>div.active {
   color: #e08821
 }
-.nk-doc-links ul>li>ul {
-  display: none;
-  overflow: hidden
-}
+
 .nk-doc-links ul>li>ul>li div {
   padding: 5px 0;
   margin-left: 20px

@@ -17,20 +17,20 @@
   padding: 40px;
 }
 
-.row > .col-md-6:nth-child(2n+1) {
-  clear: both;
-}
+// .row > .col-md-6:nth-child(2n+1) {
+//   clear: both;
+// }
 
-.row-equals {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+// .row-equals {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+// }
 
-.row-equals > div[class*='col-'] {
-  display: flex;
-  flex-direction: column;
-}
+// .row-equals > div[class*='col-'] {
+//   display: flex;
+//   flex-direction: column;
+// }
 
 body {
   overflow-y: scroll;

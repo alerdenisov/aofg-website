@@ -4,6 +4,7 @@ import Hello from '@/components/Hello';
 import Repositories from '@/components/Repositories';
 import ThreadsList from '@/components/ThreadsList';
 import Repository from '@/components/Repository';
+import Documentation from '@/components/Documentation';
 import Thread from '@/components/Thread';
 import _Inside from '@/components/_Inside';
 import _Middlewares from '@/components/_Middlewares';
@@ -28,6 +29,21 @@ const router = new Router({
       name: '_Inside',
       component: _Inside,
       children: [
+      {
+        path: '/docs',
+        name: 'Documentation',
+        redirect: '/docs/en',
+        props: { repositoriesDomain: 'aofg', repositoryId: 'docs', branch: 'master' },
+        component: Documentation,
+        children: [
+        {
+          path: '/docs/:path',
+          name: 'DocumentationPage',
+          props: true,
+          component: Documentation
+        },
+        ]
+      },
       {
         path:'/repositories',
         name: 'Repositories',

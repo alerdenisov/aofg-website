@@ -13,7 +13,11 @@ const state = {
   _fetches: {},
   _session: {},
   _last_route: null,
-  data: {}
+  data: {},
+  githubStatus: {
+    limit: 60,
+    remaining: 60
+  }
 };
 
 const store = new Vuex.Store({

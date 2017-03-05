@@ -64,20 +64,35 @@
   }
 </script>
 
-<style type="text/css" scoped="">
+<style type="text/css">
+  /* layout */
   .nk-repository-block {
     position: relative;
-    box-sizing: border-box; 
+    display: block;
+    height: 265px;
+    overflow: hidden;
+    padding: 30px;
+  }
+
+  .nk-repository-meta {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
+  }
+
+  .nk-repository-description {
+    max-height: 80px;
+    overflow: hidden;
+  }
+
+
+  /* decor */
+  .nk-repository-block {
     border: 1px solid rgba(224, 136, 33, 0.48);
     margin-bottom: 30px;
-    height: calc(100% - 30px);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 30px;
     color: white;
     text-decoration: none;
-    width: 100%;
     background-color: #0e0e0e;
     transition: background-color 0.2s ease, border 0.2s ease;
   }
@@ -85,6 +100,8 @@
   .nk-repository-block:hover {
     border: 1px solid rgba(224, 136, 33, 0.8);
     background-color: rgba(14, 14, 14, 0.54);
+    color: white;
+    text-decoration: none;
   }
 
   h2.nk-repository-title {

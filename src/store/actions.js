@@ -12,6 +12,8 @@ export async function fetch({ commit, state }, request) {
     if(typeof request !== 'object')
       throw "Request should be an object";
 
+    console.log('fetching ' + request.token);
+
     const { url, method, axios, token, config } = request;
 
     if(typeof url !== 'string') 
@@ -34,6 +36,15 @@ export async function fetch({ commit, state }, request) {
 
     const answer = await Axios[method](url, axios);
 
+    // check git calls
+    const limit = answer.headers["x-ratelimit-limit"];
+    const remaining = answer.headers["x-ratelimit-remaining"];
+    const reset = answer.headers["x-ratelimit-reset"];
+    if(typeof limit !== 'undefined' && typeof remaining != 'undefined') {
+      console.log({ limit, remaining, reset });
+      commit('github_limits', { limit, remaining, reset });
+    }
+
     await sleep(1000);
 
     commit('fetch', { token, data: answer.data });
@@ -41,6 +52,8 @@ export async function fetch({ commit, state }, request) {
     commit('fetchDone', { token });
 
     commit('increment');
+
+    console.log('fetched ' + request.token);
 
   } catch(err) {
     console.error(`[FETCH] ${err}`);

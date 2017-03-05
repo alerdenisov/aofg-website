@@ -7,13 +7,21 @@
           <spinner-inline v-if='fetchRepositories && repositories' />
         </fade-transition>
         <fade-transition>
-          <div class="row row-equals" v-if='repositories' key='showing'>
-            <div class="col-md-6" v-for='repository in repositories' :key='repository.id'>
+          <div class="row multi-columns-row nk-row-repositories equal-height" v-if='repositories' key='showing'>
+            <div class="col-xs-12 col-md-6 nk-col-repository" v-for='repository in repositories' :key='repository.id'>
+              <aofg-repository-block :repository='repository' />
+            </div>
+
+            <div class="col-xs-12 col-md-6 nk-col-repository" v-for='repository in repositories' :key='repository.id'>
+              <aofg-repository-block :repository='repository' />
+            </div>
+
+            <div class="col-xs-12 col-md-6 nk-col-repository" v-for='repository in repositories' :key='repository.id'>
               <aofg-repository-block :repository='repository' />
             </div>
           </div>  
           <div class="row row-loading" v-else key='loading'>
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
               <h2><span>Loading</span><spinner-inline /></h2>
             </div>
           </div>
@@ -68,3 +76,6 @@
     }
   };
 </script>
+
+<style>
+</style>

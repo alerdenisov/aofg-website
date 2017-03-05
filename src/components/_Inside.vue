@@ -8,7 +8,7 @@
       top: 0;
       z-index: -2;">
       <div class="bg-image" style="" ref='bgimage'>
-        <div style="background-image: url('/static/img/homepage-background.jpg');"></div>
+        <div style="background-image: url('/static/img/library-background.jpg');"></div>
       </div>
     </div>
     <router-view />

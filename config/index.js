@@ -50,7 +50,7 @@ module.exports = {
       GITHUB_CLIENT_ID: '910abf65a44b51f93318',
       GITHUB_CALLBACK: 'http://localhost:8080/',
       GITHUB_SECRET: '96b030297ff16c36783876f1a909da591fdbc7d0',
-      GITHUB_TOKEN: process.env.TOKEN,
+      // GITHUB_TOKEN: process.env.TOKEN,
       GITHUB_API: 'https://api.github.com' 
     }
   }

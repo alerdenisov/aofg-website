@@ -32,3 +32,7 @@ export function last_route(state, route) {
   const { fullPath, hash, name, path, query } = route;
   state._last_route = { fullPath, hash, name, path, query };
 }
+
+export function github_limits(state, status) {
+  state.githubStatus = status;
+}

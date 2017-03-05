@@ -26,6 +26,10 @@
       }
     },
 
+    mounted() {
+      this.fetch();
+    },
+
     watch: {
       'page': 'fetch'
     },

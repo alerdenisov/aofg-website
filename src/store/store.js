@@ -11,9 +11,12 @@ Vue.use(Vuex);
 const state = {
   count: 0,
   _fetches: {},
-  _session: {},
+  _session: {
+    token: process.env.GITHUB_TOKEN || null
+  },
   _last_route: null,
   data: {},
+  modal: null,
   githubStatus: {
     limit: 60,
     remaining: 60

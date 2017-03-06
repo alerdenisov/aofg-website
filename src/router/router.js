@@ -37,7 +37,7 @@ const router = new Router({
         component: Documentation,
         children: [
         {
-          path: '/docs/:path',
+          path: '/docs/:path+',
           name: 'DocumentationPage',
           props: true,
           component: Documentation

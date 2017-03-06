@@ -1,6 +1,15 @@
 <template>
-  <div id="app" @keyup.enter='login' tabindex="-1">
+  <div id="app">
+    <div style="position: fixed; top: 0; left: 0; z-index: 3000">
+      <button @click='login'>login Modal</button>
+      <button @click='requireAuth'>requireAuth Modal</button>
+      <button @click='githubLimit'>githubLimit Modal</button>
+    </div>
     <!-- <aofg-preloader/> -->
+    <aofg-auth-modal/>
+    <aofg-github-limit-modal/>
+    <aofg-require-auth-modal />
+
     <aofg-background/>
     <aofg-header/>
     <div class="nk-main">
@@ -13,46 +22,20 @@
     <div class="nk-gap-3"></div>
     <aofg-footer/>
 
-    <div class="nk-modal modal fade" tabindex="0" role="dialog" ref='modal'>
-      <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal nk-modal fade show" id="myModal" role="dialog" tabindex="-1"> -->
-      <div class="modal-dialog" role="document">
-        <!-- <div class="modal-icon">
-          😞 
-        </div> -->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="ion-android-close"></span></button>
-            <h4 class="modal-title nk-title" id="myModalLabel">Unauthrized limits is over</h4>
-          </div>
-          <div class="modal-body">
-            <p class='lead' style='margin-bottom: 10px'>
-              We're using GitHub API to fetch data and limits is over.
-            </p>
-            <p>
-              Please, authenticate in our application to get extra <strong>5,000</strong> calls per hour and more features:
-            </p>
-            <ul>
-              <li>👍 👎 😄 ❤️ 🎉 everything</li>
-              <li>Create new topic on forums</li>
-              <li>Enjoy to discuss with others</li>
-            </ul>
-          </div>
-          <div class="modal-footer">
-            <small>Wait 41 minute for next 60 call or </small>&nbsp;&nbsp;&nbsp;<a href="gitAuth" class="nk-btn nk-btn-color-dark-1 nk-btn-bg-white nk-btn-x3">Auth with <span class="ic-github-2"></span></a>
-
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div>
   </div>
 </template>
 
 <script>
+  import vue from 'vue'
   import AofgPreloader from '@/components/parts/Preloader.vue'
   import AofgBackground from '@/components/parts/Background.vue'
   import AofgHeader from '@/components/parts/Header.vue'
   import AofgFooter from '@/components/parts/Footer.vue'
   import FadeTransition from '@/components/misc/FadeTransition'
+
+  import AuthModal from '@/components/parts/modals/AuthModal'
+  import GithubLimitModal from '@/components/parts/modals/GithubLimitModal'
+  import RequireAuthModal from '@/components/parts/modals/RequireAuthModal'
 
   let animateModalTimeout;
 
@@ -64,31 +47,36 @@
       AofgBackground,
       AofgHeader,
       AofgFooter,
-      FadeTransition
+      FadeTransition,
+
+      'aofg-auth-modal': AuthModal,
+      'aofg-github-limit-modal': GithubLimitModal,
+      'aofg-require-auth-modal': RequireAuthModal
+    },
+
+    watch: {
+      'modal': function() {      
+        document.body.classList.toggle('modal-open', !!this.modal)
+      }
     },
 
     methods: {
-      login() {
-        clearTimeout(animateModalTimeout);
-        if (document.body.classList.toggle('modal-open')) {
-          // open
-          this.$refs.modal.classList.remove('out')
-          this.$refs.modal.classList.add('in')
-
-          document.body.setAttribute('style', 'margin-right: ${this.scrollbarWidth}px;');
-          animateModalTimeout = setTimeout(() => this.$refs.modal.style.display = 'block', 50);
-        } else {
-          // close
-          this.$refs.modal.classList.remove('in')
-          this.$refs.modal.classList.add('out')
-          document.body.setAttribute('style', `margin-right: 0;`);
-          animateModalTimeout = setTimeout(() => this.$refs.modal.style.display = 'none', 1000);
-        }
+      login() { 
+        console.log(this.modal);
+        this.$store.commit('modal', this.modal === 'login' ? false : 'login');
       },
-      
+      requireAuth() { 
+        console.log(this.modal);
+        this.$store.commit('modal', this.modal === 'requireAuth' ? false : 'requireAuth');
+      },
+      githubLimit() { 
+        console.log(this.modal);
+        this.$store.commit('modal', this.modal === 'githubLimit' ? false : 'githubLimit');
+      },
     },
 
     computed: {
+      modal() { return this.$store.state.modal; },
       scrollbarWidth() {
         const outer = document.createElement("div");
         outer.style.visibility = "hidden";

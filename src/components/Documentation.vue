@@ -5,6 +5,7 @@
         <aside class="nk-sidebar nk-sidebar-left nk-sidebar-sticky">
           <div class="nk-gap-4"></div>
           <div class="nk-doc-links">
+            <input @keyup='searchInput'>
             <documentation-tree
             :selected='selected'
             :tree='menu'
@@ -26,6 +27,18 @@
             <git-marked :content='content' v-if='content' />
           </div>
         </div> -->
+        <div v-if='searchResults && searchResults.total_count'>
+          <search-result v-for='result in searchResults.items' :result='result' path='/docs/' />
+          <!-- <li v-for='result in searchResults.items'>
+            <div>{{result.path}}</div>
+            <ul>
+              <li v-for='match in result.text_matches'>
+                <div>{{match.fragment}}</div>
+                <div><a :href='match.object_url'>{{match.object_url}}</a></div>
+              </li>
+            </ul>
+          </li> -->
+        </div>
         <documentation-body v-if='isPage' :page='selected' :repositoryId='repositoryId' :repositoriesDomain='repositoriesDomain' :branch='branch' />
         <div v-else class="nk-doc nk-box-4 bg-dark-1">
           <div class="nk-doc-item">
@@ -41,6 +54,8 @@
   import makeRequest from '@/requests'
   import DocumentationBody from '@/components/parts/DocumentationBody'
   import DocumentationTree from '@/components/parts/DocumentationTree'
+  import SearchResult from '@/components/parts/SearchResult'
+  import _ from 'lodash'
 
   export default {
     props: {
@@ -52,7 +67,9 @@
     data() {
       return {
         fetching: false,
+        fetchingSearch: false,
         menu: null,
+        query: null,
       }
     },
 
@@ -94,13 +111,52 @@
         }
 
         return recursiveFind(this.menu);
+      },
+        
+      searchResults() {
+        return this.$store.state.data[this.searchRequest.token];
+      },
+
+      searchRequest() {
+        const { repositoriesDomain, repositoryId, query } = this;
+        const requestRaw = { 
+          repositoriesDomain, 
+          repositoryId, 
+          query,
+          path: 'en/',
+          axios: {
+            headers: {
+              'Accept': 'application/vnd.github.v3.text-match+json'
+            }
+          }
+        };   
+        return makeRequest('search', requestRaw);
       }
+
     },
     components: {
       DocumentationBody,
-      DocumentationTree
+      DocumentationTree,
+      SearchResult
     },
     methods: {
+      searchInput: _.debounce(function(e) {
+        const query = this.query = e.target.value;
+        if(query && query.length > 3) {
+          console.log('search for: ' + query)
+          this.searchFetch();
+        }
+
+      }, 1000),
+
+      async searchFetch() {
+        if(this.fetchingSearch) return;
+
+        this.fetchingSearch = true;
+        await this.$store.dispatch('fetch', this.searchRequest)
+        this.fetchingSearch = false;
+      },
+
       async fetch() {
         if(this.fetching) return;
 
@@ -149,7 +205,7 @@
           node.title = name;
           node.sha = sha;
           node.type = type;
-          node.path = parts.join('__');//item.path.replace('/', '__');
+          node.path = url;//parts.join('/');//item.path.replace('/', '__');
 
           return menu;
         }, {}).tree;

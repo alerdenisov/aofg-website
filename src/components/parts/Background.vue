@@ -1,12 +1,14 @@
 <template>
   <div class="aofg-background">
-    <video-background 
+    <!-- <video-background 
       class="nk-page-background op-5" 
       mp4="/static/video/bg-2.mp4" 
       ogv="/static/video/bg-2.ogv" 
       poster="/static/video/bg-2.jpg" 
-      webm="/static/video/bg-2.webm" />
-
+      webm="/static/video/bg-2.webm" /> -->
+    <!-- <video-background 
+      class="nk-page-background op-5" 
+      poster="/static/video/bg-2.jpg" /> -->
     <div class="nk-page-border">
       <div class="nk-page-border-t"></div>
       <div class="nk-page-border-r"></div>

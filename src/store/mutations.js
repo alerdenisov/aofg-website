@@ -36,3 +36,7 @@ export function last_route(state, route) {
 export function github_limits(state, status) {
   state.githubStatus = status;
 }
+
+export function modal(state, code) {
+  state.modal = code;
+}

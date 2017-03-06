@@ -22,7 +22,10 @@ const CONFIGS = {
   },
   content({ repositoriesDomain, repositoryId, url }) {
     return { repositoriesDomain, repositoryId, url };
-  }
+  },
+  search({ repositoriesDomain, repositoryId, query, path, extension  })  {
+    return { repositoriesDomain, repositoryId, query, path, extension };
+  },
 }
 
 const METHODS = {
@@ -43,7 +46,10 @@ const METHODS = {
   },
   content() {
     return 'get';
-  }
+  },
+  search()  {
+    return 'get';
+  },
 }
 
 const ENDPOINTS = {
@@ -64,7 +70,16 @@ const ENDPOINTS = {
   },
   content({ repositoriesDomain, repositoryId, url }) {
     return `https://raw.githubusercontent.com/${repositoriesDomain}/${repositoryId}/master/${url}`;
-  }
+  },
+  search({ repositoriesDomain, repositoryId, query, path, extension })  {
+    extension = extension || 'md';
+
+    return [`${GITHUB}/search/code?q=${query}`,
+            `extension:${extension}`,
+            `repo:${repositoriesDomain}/${repositoryId}`,
+            `in:file`,
+            path ? `path:${path}` : ''].join("+");
+  },
 }
 
 const TOKENS = {
@@ -85,7 +100,10 @@ const TOKENS = {
   },
   content({ repositoriesDomain, repositoryId, url }) {
     return Base64.encode(`_cont_${repositoriesDomain}_${repositoryId}_${url}`);
-  }
+  },
+  search({ repositoriesDomain, repositoryId, query, path, extension  })  {
+    return Base64.encode(`_search_${repositoriesDomain}_${repositoryId}_${path}_${query}`);
+  },
 }
 
 export function makeConfig(type, raw) {
@@ -99,16 +117,19 @@ export function makeUrl(type, config) {
 }
 export default function makeRequest(type, raw) {
   const config = makeConfig(type, raw);
-  return {
+  const { axios } = raw;
+  const result = {
     url: makeUrl(type, config),
     token: makeToken(type, config),
     method: METHODS[type](),
     axios: {
-      // ...(raw.axios),
       headers: {
         'Accept': 'application/vnd.github.squirrel-girl-preview'
-      }
+      },
+      ...axios
     },
     config,
   }
+
+  return result;
 }

@@ -1,6 +1,6 @@
 <template>
   <ul v-if='menu'>
-    <tree-node v-for='(item, key) in menu' :key='item.sha' :open='item.open' :title='item.title' :path='`/docs/${item.path}`' :tree='item.tree' />
+    <tree-node v-for='(item, key) in menu' :key='item.sha' :open='item.open' :title='item.title' :path='item.path' pathRoot='/docs/' :tree='item.tree' />
   </ul>
 </template>
 

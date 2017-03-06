@@ -35,6 +35,7 @@
 body {
   overflow-y: scroll;
   overflow-x: hidden;
+  background-color: #222222;
 }
 
 div.nk-forum-activity-avatar {
@@ -57,13 +58,13 @@ div.nk-forum-activity-avatar {
 
 
 .bg-image {
-  transition: mask-position 1.55s ease-out, -webkit-mask-position 1.55s ease-out, opacity 1.55s ease-out;
-  mask-image: url(/static/img/mask.png);
-  -webkit-mask-image: url(/static/img/mask.png);
-  -webkit-mask-position: 0% 100%;
-  mask-position: 0% 100%;
-  -webkit-mask-repeat: repeat-x;
-  mask-repeat: repeat-x;
+  transition: mask-position 1.55s ease-out, -webkit-mask-position 1.55s ease-out, opacity .55s ease-out;
+  // mask-image: url(/static/img/mask.png);
+  // -webkit-mask-image: url(/static/img/mask.png);
+  // -webkit-mask-position: 0% 100%;
+  // mask-position: 0% 100%;
+  // -webkit-mask-repeat: repeat-x;
+  // mask-repeat: repeat-x;
   z-index: -2;
 }
 
@@ -169,4 +170,71 @@ p {
 }
 
 img.grayscale {
+}
+
+.nk-block, .nk-main {
+  min-height: 54vh;
+}
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+  overflow-y: scroll !important;
+}
+
+.nk-modal.modal {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nk-modal .modal-dialog {
+  margin: 20px;
+}
+
+
+
+@keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+.nk-modal {
+  perspective: 100vw;
+}
+
+.nk-modal .modal-dialog { 
+  background-color: red;
+  animation-duration: 1s;
+  animation-name: flipInX;
+  animation-fill-mode: both;
+  /* State of active */
 }

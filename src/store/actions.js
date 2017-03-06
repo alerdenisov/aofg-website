@@ -6,6 +6,9 @@ import Axios from 'axios'
 import sleep from 'sleep-promise'
 import vue from 'vue'
 
+
+const GITHUB = process.env.GITHUB_API;
+
 // Fetch
 export async function fetch({ commit, state }, request) {
   try {
@@ -13,8 +16,12 @@ export async function fetch({ commit, state }, request) {
       throw "Request should be an object";
 
     console.log('fetching ' + request.token);
-
     const { url, method, axios, token, config } = request;
+
+    if(url.startsWith(GITHUB) && state._session.token) {
+      axios.headers = axios.headers || {}
+      axios.headers.Authorization = 'token ' + state._session.token;
+    }
 
     if(typeof url !== 'string') 
       throw "Request should contains a url " + request;

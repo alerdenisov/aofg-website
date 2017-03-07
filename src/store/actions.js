@@ -15,7 +15,6 @@ export async function fetch({ commit, state }, request) {
     if(typeof request !== 'object')
       throw "Request should be an object";
 
-    console.log('fetching ' + request.token);
     const { url, method, axios, token, config } = request;
 
     if(url.startsWith(GITHUB) && state._session.token) {
@@ -34,7 +33,6 @@ export async function fetch({ commit, state }, request) {
 
     if(state._fetches[url]) 
     {
-      console.log('request in progress: ', state._fetches[url].task)
       await state._fetches[url].task;
       return;
     }
@@ -60,7 +58,6 @@ export async function fetch({ commit, state }, request) {
 
     commit('increment');
 
-    console.log('fetched ' + request.token);
 
   } catch(err) {
     console.error(`[FETCH] ${err}`);

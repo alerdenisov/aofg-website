@@ -18,7 +18,6 @@
   // const asyncMarked = pify(marked);
 
   renderer.table = (header, body) => {
-    console.log(header, body)
     return `
     <table class='table table-striped'>
       <thead>

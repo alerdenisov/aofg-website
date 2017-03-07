@@ -14,6 +14,10 @@
       // console.log()
 
       if(!this.$store.state._session.token) {
+        if(process.env.GITHUB_TOKEN) {
+          this.$store.commit('github_token', process.env.GITHUB_TOKEN);
+          return;
+        }
         // no auth data
         if(!this.$route.query.code)
         {
@@ -28,7 +32,6 @@
           const { code } = this.$route.query;
 
           this.access_token(code);
-
         }
       }
 

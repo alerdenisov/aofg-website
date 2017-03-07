@@ -37,6 +37,12 @@ export function github_limits(state, status) {
   state.githubStatus = status;
 }
 
+export function github_token(state, token) {
+  // body...
+  state._session.token = token;
+}
+
 export function modal(state, code) {
   state.modal = code;
 }
+

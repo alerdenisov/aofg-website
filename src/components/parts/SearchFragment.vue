@@ -24,7 +24,7 @@
       },
 
       finalHtml() {
-        return this.parts.map(part => `<code class="${part.highlight ? 'highlight' : ''}">${part.text.replaceAll('\n', '<br />')}</code>`).join('');
+        return this.parts.map(part => `<code class="${part.highlight ? 'highlight' : ''}">${part.text.replaceAll('\n+', '<br />')}</code>`).join('');
       },
 
       matches() {

@@ -2,6 +2,7 @@
   <div class="nk-doc nk-box-4 bg-dark-1">
     <!-- START: Getting Started -->
     <div class="nk-doc-item">
+      <h1 v-if='title' style="margin-top: 0;">{{title}}</h1>
       <git-marked :content='body' v-if='body' />
     </div>
   </div>
@@ -47,6 +48,10 @@
         return this.content.body;
       },
 
+      title() {
+        return this.content.attributes["title"];
+      },
+
       content() {
         return fm(this.$store.state.data[this.request.token]);
       }
@@ -65,3 +70,21 @@
     }
   }
 </script>
+
+<style type="text/css">
+  .nk-doc-item .h1, 
+  .nk-doc-item .h2, 
+  .nk-doc-item .h3, 
+  .nk-doc-item .h4, 
+  .nk-doc-item .h5, 
+  .nk-doc-item .h6, 
+  .nk-doc-item h1, 
+  .nk-doc-item h2, 
+  .nk-doc-item h3, 
+  .nk-doc-item h4, 
+  .nk-doc-item h5, 
+  .nk-doc-item h6 {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+  }
+</style>

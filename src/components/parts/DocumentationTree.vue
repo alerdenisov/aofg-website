@@ -1,6 +1,6 @@
 <template>
   <ul v-if='menu'>
-    <tree-node v-for='(item, key) in menu' :key='item.sha' :open='item.open' :title='item.title' :path='item.path' pathRoot='/docs/' :tree='item.tree' />
+    <tree-node v-for='(item, key) in menu' :key='item.sha' :type='item.type' :open='item.open' :title='item.title' :path='item.path' pathRoot='/docs/' :tree='item.tree' />
   </ul>
 </template>
 
@@ -31,7 +31,6 @@
 
     methods: {
       updateMenu() {
-        console.log('path updated ' + this.path);
         this.menu = this.selectTreeRecursive(this.tree);
         this.$forceUpdate();
       },

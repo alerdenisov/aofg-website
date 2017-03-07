@@ -78,7 +78,6 @@ const router = new Router({
 
 
 router.afterEach(function (transition) {
-  console.log('test')
   document.getElementById('app').focus();
 });
 
